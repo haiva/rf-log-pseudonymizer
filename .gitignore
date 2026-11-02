@@ -1,0 +1,18 @@
+# Avain
+.env
+
+# Python-ympäristö ja välimuistit
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Ajojen tulokset
+results/
+
+# Oikeat logit: vain README versionhallintaan
+real_logs/*
+!real_logs/README.md
+
+# Muut tiedostot
+settings.local.json

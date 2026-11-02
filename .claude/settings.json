@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(./real_logs/**)",
+      "Read(./results/original/**)",
+      "Read(./.env)"
+    ],
+    "allow": [
+      "Bash(python -m pytest:*)",
+      "Bash(bash scripts/luo_testiaineisto.sh:*)",
+      "Bash(bash scripts/pseudonymisoi.sh:*)",
+      "Bash(bash scripts/tarkista_vuodot.sh:*)"
+    ]
+  }
+}
