@@ -25,7 +25,9 @@ tai syötekansioon ei kosketa.
 |---|---|---|---|
 | (kuva) | upotetut `<img>`-tagit | `<img src="data:image/png;base64,…">` | `[upotettu kuva poistettu]` |
 | `JWT` | `eyJ…`-alkuiset kolmiosaiset tokenit | `eyJhbGciOi….eyJzdWIi….c2ln…` | `<JWT_1a2b3c4d>` |
-| `TOKEN` | `token=`, `access_token=`, `session=`, `sessionid=`, `sid=`, `Bearer ` + vähintään 8 merkkiä | `sessionid=s3ss10nT0k3n…` | `sessionid=<TOKEN_…>` |
+| `APIKEY` | palveluntarjoajien avaimet (`sk-…`, `AKIA…`, `ghp_…`, `xoxb-…`, `AIza…`) sekä `api_key`/`apikey`/`X-API-Key` + `=` tai `:` + vähintään 8 merkkiä | `X-API-Key: AKIAIOSFODNN7EXAMPLE` | `X-API-Key: <APIKEY_…>` |
+| `SECRET` | `*secret`, `password`, `passwd`, `pwd` + `=` tai `:` + vähintään 8 merkkiä (ei `${MUUTTUJA}`), `Authorization: Basic …` | `"client_secret": "cl1entS3cret…"` | `"client_secret": "<SECRET_…>"` |
+| `TOKEN` | `*token` + `=` tai `:` (myös JSON), `session=`, `sessionid=`, `sid=`, `Bearer ` + vähintään 8 merkkiä | `sessionid=s3ss10nT0k3n…` | `sessionid=<TOKEN_…>` |
 | `EMAIL` | sähköpostiosoitteet | `matti.meikalainen@example.com` | `<EMAIL_…>` |
 | `UUID` | 8-4-4-4-12-heksamuoto | `3f2b8c1e-7a4d-4e5f-9b6a-1c2d3e4f5a6b` | `<UUID_…>` |
 | `HETU` | suomalaiset henkilötunnukset (tarkistemerkkiä ei vaadita oikeaksi) | `150385-9345`, `010105A967X` | `<HETU_…>` |

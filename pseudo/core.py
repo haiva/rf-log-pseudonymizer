@@ -11,13 +11,31 @@ IMAGE_RE = re.compile(r"<img\b[^>]*>", re.IGNORECASE)
 # IPv4-osoitteen numeroryhmä 0–255
 _OCTET = r"(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)"
 
+# Avainsanan ja arvon välinen erotin: key=, key: , "key": "  (myös HTML-escapattuna)
+_SEP = r"""\s*(?:["']|&quot;)?\s*[:=]\s*(?:["']|&quot;)?\s*"""
+# Avaimen tai tokenin arvo
+_VALUE = r"([A-Za-z0-9._~+/%=-]{8,})"
+# Salasanan arvo: myös erikoismerkit, mutta ei RF-muuttujaa ${...} eikä lainausmerkkejä
+_SECRET_VALUE = r"""([^\s"'&<>,;${}]{8,})"""
+
 # (tyyppi, säännöllinen lauseke, korvattava ryhmä). Järjestys on merkitsevä: tarkemmat ja
 # pidemmät muodot ensin, jotta niiden osat eivät osu yleisempiin sääntöihin.
 RULES = [
     ("JWT", re.compile(r"\beyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+"), 0),
+    # Palveluntarjoajien etuliitteelliset avaimet: OpenAI/Anthropic, AWS, GitHub, Slack, Google
+    ("APIKEY", re.compile(
+        r"\b(?:sk-[A-Za-z0-9_-]{20,}|AKIA[0-9A-Z]{16}|gh[pousr]_[A-Za-z0-9]{36,}"
+        r"|xox[abprs]-[A-Za-z0-9-]{10,}|AIza[0-9A-Za-z_-]{35})"
+    ), 0),
+    ("APIKEY", re.compile(rf"(?<![A-Za-z0-9])(?:x-)?api[_-]?key{_SEP}{_VALUE}", re.IGNORECASE), 1),
+    ("SECRET", re.compile(r"\bAuthorization:\s*Basic\s+([A-Za-z0-9+/]{8,}={0,2})", re.IGNORECASE), 1),
+    ("SECRET", re.compile(
+        rf"(?<![A-Za-z0-9])[A-Za-z_-]*(?:secret|password|passwd|pwd){_SEP}{_SECRET_VALUE}",
+        re.IGNORECASE,
+    ), 1),
     ("TOKEN", re.compile(
-        r"(?:\b(?:access_token|sessionid|session|token|sid)=|\bBearer\s+)"
-        r"([A-Za-z0-9._~+/%=-]{8,})",
+        rf"(?:\b(?:sessionid|session|sid)=|(?<![A-Za-z0-9])[A-Za-z_-]*token{_SEP}|\bBearer\s+)"
+        rf"{_VALUE}",
         re.IGNORECASE,
     ), 1),
     ("EMAIL", re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b"), 0),

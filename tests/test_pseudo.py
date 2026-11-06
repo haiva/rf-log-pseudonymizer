@@ -26,7 +26,7 @@ KNOWN = runpy.run_path(str(KNOWN_FILE))
 KNOWN_PII = KNOWN["KNOWN_PII"]
 
 TEST_KEY = "testiavain-vain-synteettiselle-aineistolle"
-EXPECTED_TYPES = {"JWT", "TOKEN", "EMAIL", "UUID", "HETU", "PHONE", "IP"}
+EXPECTED_TYPES = {"JWT", "APIKEY", "SECRET", "TOKEN", "EMAIL", "UUID", "HETU", "PHONE", "IP"}
 PSEUDONYM = re.compile(r"(?:<|&lt;)([A-Z]+)_[0-9a-f]{8}(?:>|&gt;)")
 
 # (syöte, odotettu tyyppi, arvo joka ei saa jäädä tekstiin)
@@ -35,6 +35,19 @@ RULE_EXAMPLES = [
     ("url?access_token=AbCdEf123456&x=1", "TOKEN", "AbCdEf123456"),
     ("Cookie: sid=0123456789abcdef", "TOKEN", "0123456789abcdef"),
     ("Bearer abcdefgh12345678", "TOKEN", "abcdefgh12345678"),
+    ('{"refresh_token": "' + KNOWN["REFRESH_TOKEN"] + '"}', "TOKEN", KNOWN["REFRESH_TOKEN"]),
+    ("X-Auth-Token: AbCdEf123456", "TOKEN", "AbCdEf123456"),
+    ("url?api_key=" + KNOWN["API_KEY"], "APIKEY", KNOWN["API_KEY"]),
+    ("X-API-Key: " + KNOWN["API_KEY"], "APIKEY", KNOWN["API_KEY"]),
+    ("avain " + KNOWN["PROVIDER_KEY"], "APIKEY", KNOWN["PROVIDER_KEY"]),
+    ("avain sk-synteettinen0123456789abcd", "APIKEY", "sk-synteettinen0123456789abcd"),
+    ("avain ghp_" + "x1" * 18, "APIKEY", "ghp_" + "x1" * 18),
+    ("avain xoxb-1234567890-synteettinen", "APIKEY", "xoxb-1234567890-synteettinen"),
+    ('{"client_secret": "' + KNOWN["CLIENT_SECRET"] + '"}', "SECRET", KNOWN["CLIENT_SECRET"]),
+    ("&quot;client_secret&quot;: &quot;" + KNOWN["CLIENT_SECRET"] + "&quot;", "SECRET",
+     KNOWN["CLIENT_SECRET"]),
+    ("user=testaaja password=" + KNOWN["PASSWORD"], "SECRET", KNOWN["PASSWORD"]),
+    ("Authorization: Basic " + KNOWN["BASIC_AUTH"], "SECRET", KNOWN["BASIC_AUTH"]),
     ("posti: " + KNOWN["EMAIL"], "EMAIL", KNOWN["EMAIL"]),
     ("id " + KNOWN["USER_UUID"], "UUID", KNOWN["USER_UUID"]),
     ("hetu " + KNOWN["HETU_1900"], "HETU", KNOWN["HETU_1900"]),
@@ -159,6 +172,10 @@ def test_saannot(text, kind, value):
     "kesto 0.000296 s",
     "aika 2026-11-02T10:14:28.504391",
     "token=lyhyt",                     # alle 8 merkkiä
+    "password=${PASSWORD}",            # RF-muuttuja ei ole salaisuus
+    "Typing password into text field 'id:password'.",
+    "Basic authentication enabled",
+    "tokens=12345678",
 ])
 def test_ei_vaaria_osumia(text):
     from pseudo.core import Pseudonymizer

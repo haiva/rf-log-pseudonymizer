@@ -21,6 +21,16 @@ JWT = (
     ".c2lnbmF0dXJlLXN5bnRlZXR0aW5lbg"
 )
 
+REFRESH_TOKEN = "r3fr3shT0k3nSynteettinen99"
+# Avainsanan perusteella tunnistettava avain (api_key=, X-API-Key:)
+API_KEY = "ak_test_9f8e7d6c5b4a3210ZyXw"
+# AWS:n dokumentaatiossa julkaistu esimerkkiavain, tunnistetaan etuliitteestä
+PROVIDER_KEY = "AKIAIOSFODNN7EXAMPLE"
+CLIENT_SECRET = "cl1entS3cretSynteettinen42"
+PASSWORD = "Salasana!2026synt"
+# base64("testaaja:synteettinen")
+BASIC_AUTH = "dGVzdGFhamE6c3ludGVldHRpbmVu"
+
 PHONE = "+358 40 123 4567"
 
 # Oikea tarkistemerkki: 1503859345 % 31 -> "5", 010105967 % 31 -> "X"
@@ -41,6 +51,12 @@ KNOWN_PII = [
     USER_UUID,
     SESSION_TOKEN,
     JWT,
+    REFRESH_TOKEN,
+    API_KEY,
+    PROVIDER_KEY,
+    CLIENT_SECRET,
+    PASSWORD,
+    BASIC_AUTH,
     PHONE,
     HETU_1900,
     HETU_2000,
