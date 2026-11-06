@@ -25,7 +25,7 @@ tai syötekansioon ei kosketa.
 |---|---|---|---|
 | (kuva) | upotetut `<img>`-tagit | `<img src="data:image/png;base64,…">` | `[upotettu kuva poistettu]` |
 | `JWT` | `eyJ…`-alkuiset kolmiosaiset tokenit | `eyJhbGciOi….eyJzdWIi….c2ln…` | `<JWT_1a2b3c4d>` |
-| `APIKEY` | palveluntarjoajien avaimet (`sk-…`, `AKIA…`, `ghp_…`, `xoxb-…`, `AIza…`) sekä `api_key`/`apikey`/`X-API-Key` + `=` tai `:` + vähintään 8 merkkiä | `X-API-Key: AKIAIOSFODNN7EXAMPLE` | `X-API-Key: <APIKEY_…>` |
+| `APIKEY` | palveluntarjoajien avaimet (`sk-…`, `AKIA…`, `ghp_…`, `xoxb-…`, `AIza…`) sekä `api_key`/`apikey`/`X-API-Key`/`app_key`/`app_id`/`X-App-Id` + `=` tai `:` + vähintään 8 merkkiä | `X-API-Key: AKIAIOSFODNN7EXAMPLE` | `X-API-Key: <APIKEY_…>` |
 | `SECRET` | `*secret`, `password`, `passwd`, `pwd` + `=` tai `:` + vähintään 8 merkkiä (ei `${MUUTTUJA}`), `Authorization: Basic …` | `"client_secret": "cl1entS3cret…"` | `"client_secret": "<SECRET_…>"` |
 | `TOKEN` | `*token` + `=` tai `:` (myös JSON), `session=`, `sessionid=`, `sid=`, `Bearer ` + vähintään 8 merkkiä | `sessionid=s3ss10nT0k3n…` | `sessionid=<TOKEN_…>` |
 | `EMAIL` | sähköpostiosoitteet | `matti.meikalainen@example.com` | `<EMAIL_…>` |

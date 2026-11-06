@@ -24,6 +24,9 @@ JWT = (
 REFRESH_TOKEN = "r3fr3shT0k3nSynteettinen99"
 # Avainsanan perusteella tunnistettava avain (api_key=, X-API-Key:)
 API_KEY = "ak_test_9f8e7d6c5b4a3210ZyXw"
+# Sovellustunnus ja -avain (app_id=, app_key=)
+APP_ID = "appid_synt_4c3b2a19"
+APP_KEY = "appkey_synt_7e6d5c4b3a29"
 # AWS:n dokumentaatiossa julkaistu esimerkkiavain, tunnistetaan etuliitteestä
 PROVIDER_KEY = "AKIAIOSFODNN7EXAMPLE"
 CLIENT_SECRET = "cl1entS3cretSynteettinen42"
@@ -53,6 +56,8 @@ KNOWN_PII = [
     JWT,
     REFRESH_TOKEN,
     API_KEY,
+    APP_ID,
+    APP_KEY,
     PROVIDER_KEY,
     CLIENT_SECRET,
     PASSWORD,

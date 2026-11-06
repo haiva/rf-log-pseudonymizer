@@ -27,7 +27,10 @@ RULES = [
         r"\b(?:sk-[A-Za-z0-9_-]{20,}|AKIA[0-9A-Z]{16}|gh[pousr]_[A-Za-z0-9]{36,}"
         r"|xox[abprs]-[A-Za-z0-9-]{10,}|AIza[0-9A-Za-z_-]{35})"
     ), 0),
-    ("APIKEY", re.compile(rf"(?<![A-Za-z0-9])(?:x-)?api[_-]?key{_SEP}{_VALUE}", re.IGNORECASE), 1),
+    # api_key, X-API-Key, app_key, app_id, X-App-Id
+    ("APIKEY", re.compile(
+        rf"(?<![A-Za-z0-9])(?:x-)?(?:api[_-]?key|app[_-]?(?:key|id)){_SEP}{_VALUE}", re.IGNORECASE
+    ), 1),
     ("SECRET", re.compile(r"\bAuthorization:\s*Basic\s+([A-Za-z0-9+/]{8,}={0,2})", re.IGNORECASE), 1),
     ("SECRET", re.compile(
         rf"(?<![A-Za-z0-9])[A-Za-z_-]*(?:secret|password|passwd|pwd){_SEP}{_SECRET_VALUE}",

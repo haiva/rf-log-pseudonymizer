@@ -86,7 +86,7 @@ yleisempiin sääntöihin.
 |---|---|---|---|
 | 0 | (kuva) | `<img …>`-tagit | Korvataan tekstillä `[upotettu kuva poistettu]` ennen muita sääntöjä. Lasketaan erikseen. |
 | 1 | `JWT` | `eyJ…`-alkuiset kolmiosaiset tokenit | Ennen TOKEN-sääntöä, koska JWT on usein `Bearer`-sanan perässä. |
-| 2a | `APIKEY` | palveluntarjoajien etuliitteelliset avaimet; `api_key`/`apikey`/`X-API-Key` + `=`/`:` + arvo | Etuliiteavain korvataan kokonaan, avainsanamuodossa vain arvo. |
+| 2a | `APIKEY` | palveluntarjoajien etuliitteelliset avaimet; `api_key`/`apikey`/`X-API-Key`/`app_key`/`app_id`/`X-App-Id` + `=`/`:` + arvo | Etuliiteavain korvataan kokonaan, avainsanamuodossa vain arvo. |
 | 2b | `SECRET` | `Authorization: Basic …`; `*secret`, `password`, `passwd`, `pwd` + `=`/`:` + arvo | Arvossa sallitaan erikoismerkit, mutta RF-muuttujaa `${…}` ei korvata. |
 | 2c | `TOKEN` | `*token` + `=`/`:` (myös JSON ja `&quot;`), `session=`, `sessionid=`, `sid=`, `Bearer ` + arvo (vähintään 8 merkkiä) | Korvataan vain arvo, avain säilyy: `token=<TOKEN_…>`. |
 | 3 | `EMAIL` | sähköpostiosoitteet | Ennen UUID- ja IP-sääntöjä. |

@@ -22,6 +22,7 @@ Kirjautuminen Ja Istunto
 Avaimet Ja Salaisuudet
     Log    GET https://api.example.com/v1/data?api_key=${API_KEY}
     Log    X-API-Key: ${PROVIDER_KEY}
+    Log    GET https://api.example.com/v1/items?app_id=${APP_ID}&app_key=${APP_KEY}
     Log    Authorization: Basic ${BASIC_AUTH}
     Log    Vastaus: {"client_secret": "${CLIENT_SECRET}", "refresh_token": "${REFRESH_TOKEN}"}
     Log    Yhdistetään tietokantaan: user=testaaja password=${PASSWORD}
